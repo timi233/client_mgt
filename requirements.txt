@@ -1,0 +1,21 @@
+# Core
+Django==6.0.1
+djangorestframework==3.16.1
+
+# Database
+psycopg2-binary==2.9.11
+redis==5.0.0
+
+# API
+django-cors-headers==4.3.0
+drf-spectacular==0.27.0
+
+# Task Queue
+celery==5.6.2
+django-celery-beat==2.5.0
+
+# Utilities
+python-decouple==3.8
+pillow==10.0.0
+requests==2.31.0
+python-dateutil==2.8.2

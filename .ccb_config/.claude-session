@@ -1,0 +1,16 @@
+{
+  "session_id": "ai-1770004302-1254748",
+  "ccb_project_id": "4bb0e1f2174d8f5230632a6e438ae03fb8c1fb08016f4d8a1f4b175aa2d0141e",
+  "work_dir": "/home/jian/project/New-CRM",
+  "work_dir_norm": "/home/jian/project/New-CRM",
+  "start_dir": "/home/jian/project/New-CRM",
+  "terminal": "tmux",
+  "active": true,
+  "started_at": "2026-01-21 10:04:00",
+  "updated_at": "2026-02-02 13:49:28",
+  "pane_id": "%0",
+  "pane_title_marker": "CCB-Claude",
+  "ended_at": "2026-02-02 11:46:55",
+  "claude_session_path": "/home/jian/.claude/projects/-home-jian-project-New-CRM/122ab92d-21df-45d5-96ec-8ab8db639aa8.jsonl",
+  "claude_session_id": "122ab92d-21df-45d5-96ec-8ab8db639aa8"
+}
