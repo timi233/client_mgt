@@ -2,32 +2,21 @@
 
 import { useState, useEffect } from "react";
 import {
-  Layout,
-  Menu,
   Table,
   Input,
   Button,
-  Space,
   Card,
   Select,
   Tag,
-  Dropdown,
+  Space,
 } from "antd";
 import {
-  ShopOutlined,
-  FileTextOutlined,
-  TeamOutlined,
-  UserOutlined,
-  DashboardOutlined,
   SearchOutlined,
   PlusOutlined,
-  MoreOutlined,
-  LogoutOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { customerAPI } from "@/lib/api-client";
 
-const { Header, Sider, Content } = Layout;
 const { Search } = Input;
 const { Option } = Select;
 
@@ -75,45 +64,6 @@ export default function CustomerListPage() {
   const handleScaleChange = (value: string) => {
     setFilters((prev) => ({ ...prev, scale: value }));
     setPagination((prev) => ({ ...prev, current: 1 }));
-  };
-
-  const menuItems = [
-    {
-      key: "dashboard",
-      icon: <DashboardOutlined />,
-      label: "仪表盘",
-    },
-    {
-      key: "customers",
-      icon: <ShopOutlined />,
-      label: "客户管理",
-    },
-    {
-      key: "opportunities",
-      icon: <FileTextOutlined />,
-      label: "商机管理",
-    },
-    {
-      key: "team",
-      icon: <TeamOutlined />,
-      label: "团队管理",
-    },
-    {
-      key: "profile",
-      icon: <UserOutlined />,
-      label: "个人中心",
-    },
-  ];
-
-  const handleMenuClick = ({ key }: { key: string }) => {
-    router.push(`/${key}`);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("user");
-    router.push("/login");
   };
 
   const columns = [
@@ -176,81 +126,56 @@ export default function CustomerListPage() {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Sider theme="light" width={200}>
-        <div className="h-16 flex items-center justify-center border-b">
-          <span className="text-xl font-bold">Pury CRM</span>
-        </div>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={["customers"]}
-          style={{ height: "100%", borderRight: 0 }}
-          items={menuItems}
-          onClick={handleMenuClick}
+    <Card>
+      <div className="mb-4 flex gap-4 flex-wrap">
+        <Search
+          placeholder="搜索客户名称"
+          allowClear
+          style={{ width: 300 }}
+          onSearch={handleSearch}
+          prefix={<SearchOutlined />}
         />
-      </Sider>
-      <Layout>
-        <Header className="bg-white border-b flex items-center justify-between px-6">
-          <div className="text-lg font-medium">客户管理</div>
-          <div className="flex items-center gap-4">
-            <span className="text-gray-600">管理员</span>
-            <LogoutOutlined className="cursor-pointer" onClick={handleLogout} />
-          </div>
-        </Header>
-        <Content className="bg-gray-50 p-6">
-          <Card>
-            <div className="mb-4 flex gap-4 flex-wrap">
-              <Search
-                placeholder="搜索客户名称"
-                allowClear
-                style={{ width: 300 }}
-                onSearch={handleSearch}
-                prefix={<SearchOutlined />}
-              />
-              <Select
-                placeholder="选择行业"
-                allowClear
-                style={{ width: 200 }}
-                onChange={handleIndustryChange}
-              >
-                <Option value="科技">科技</Option>
-                <Option value="金融">金融</Option>
-                <Option value="制造">制造</Option>
-                <Option value="零售">零售</Option>
-                <Option value="教育">教育</Option>
-                <Option value="医疗">医疗</Option>
-              </Select>
-              <Select
-                placeholder="选择规模"
-                allowClear
-                style={{ width: 200 }}
-                onChange={handleScaleChange}
-              >
-                <Option value="small">小型</Option>
-                <Option value="medium">中型</Option>
-                <Option value="large">大型</Option>
-              </Select>
-              <Button type="primary" icon={<PlusOutlined />} onClick={handleCreateCustomer}>
-                新建客户
-              </Button>
-            </div>
-            <Table
-              columns={columns}
-              dataSource={customers}
-              rowKey="id"
-              loading={loading}
-              pagination={{
-                current: pagination.current,
-                pageSize: pagination.pageSize,
-                total: pagination.total,
-                onChange: (page, pageSize) => {
-                  setPagination((prev) => ({ ...prev, current: page, pageSize }));
-                },
-              }}
-            />
-          </Card>
-        </Content>
-      </Layout>
-    </Layout>
+        <Select
+          placeholder="选择行业"
+          allowClear
+          style={{ width: 200 }}
+          onChange={handleIndustryChange}
+        >
+          <Option value="科技">科技</Option>
+          <Option value="金融">金融</Option>
+          <Option value="制造">制造</Option>
+          <Option value="零售">零售</Option>
+          <Option value="教育">教育</Option>
+          <Option value="医疗">医疗</Option>
+        </Select>
+        <Select
+          placeholder="选择规模"
+          allowClear
+          style={{ width: 200 }}
+          onChange={handleScaleChange}
+        >
+          <Option value="small">小型</Option>
+          <Option value="medium">中型</Option>
+          <Option value="large">大型</Option>
+        </Select>
+        <Button type="primary" icon={<PlusOutlined />} onClick={handleCreateCustomer}>
+          新建客户
+        </Button>
+      </div>
+      <Table
+        columns={columns}
+        dataSource={customers}
+        rowKey="id"
+        loading={loading}
+        pagination={{
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+          total: pagination.total,
+          onChange: (page, pageSize) => {
+            setPagination((prev) => ({ ...prev, current: page, pageSize }));
+          },
+        }}
+      />
+    </Card>
   );
 }
