@@ -8,6 +8,7 @@ import {
   ShopOutlined,
   FileTextOutlined,
   LogoutOutlined,
+  CustomerServiceOutlined,
 } from "@ant-design/icons";
 import { useRouter, usePathname } from "next/navigation";
 import { ReactNode } from "react";
@@ -27,6 +28,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       key: "/dashboard",
       icon: <DashboardOutlined />,
       label: "仪表盘",
+    },
+    {
+      key: "/leads",
+      icon: <CustomerServiceOutlined />,
+      label: "线索管理",
     },
     {
       key: "/customers",
@@ -63,6 +69,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const getSelectedKey = () => {
     if (pathname === "/") return "/dashboard";
+    if (pathname.startsWith("/leads")) return "/leads";
     if (pathname.startsWith("/customers")) return "/customers";
     if (pathname.startsWith("/contacts")) return "/contacts";
     if (pathname.startsWith("/opportunities")) return "/opportunities";
@@ -72,6 +79,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const getTitle = () => {
     if (pathname === "/" || pathname === "/dashboard") return "仪表盘";
+    if (pathname.startsWith("/leads")) return "线索管理";
     if (pathname.startsWith("/customers")) return "客户管理";
     if (pathname.startsWith("/contacts")) return "联系人管理";
     if (pathname.startsWith("/opportunities")) return "商机管理";

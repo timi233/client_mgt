@@ -74,3 +74,30 @@ export const contactAPI = {
     return apiClient.get(`/customers/contacts/${id}/`);
   },
 };
+
+export const leadAPI = {
+  list: (params?: any) => {
+    return apiClient.get("/api/v1/customers/leads/", { params });
+  },
+  create: (data: any) => {
+    return apiClient.post("/api/v1/customers/leads/", data);
+  },
+  update: (id: string, data: any) => {
+    return apiClient.put(`/api/v1/customers/leads/${id}/`, data);
+  },
+  delete: (id: string) => {
+    return apiClient.delete(`/api/v1/customers/leads/${id}/`);
+  },
+  detail: (id: string) => {
+    return apiClient.get(`/api/v1/customers/leads/${id}/`);
+  },
+  convertToCustomer: (id: string, data: any) => {
+    return apiClient.post(`/api/v1/customers/leads/${id}/convert_to_customer/`, data);
+  },
+  batchDelete: (ids: string[]) => {
+    return apiClient.post("/api/v1/customers/leads/batch_delete/", { ids });
+  },
+  batchAssign: (ids: string[], ownerId: string) => {
+    return apiClient.post("/api/v1/customers/leads/batch_assign/", { ids, owner: ownerId });
+  },
+};
