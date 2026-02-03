@@ -12,6 +12,27 @@ export const authAPI = {
   },
 };
 
+export const userAPI = {
+  me: () => {
+    return apiClient.get("/api/v1/accounts/users/me/");
+  },
+  list: (params?: any) => {
+    return apiClient.get("/api/v1/accounts/users/", { params });
+  },
+  create: (data: any) => {
+    return apiClient.post("/api/v1/accounts/users/", data);
+  },
+  update: (id: string, data: any) => {
+    return apiClient.put(`/api/v1/accounts/users/${id}/`, data);
+  },
+  delete: (id: string) => {
+    return apiClient.delete(`/api/v1/accounts/users/${id}/`);
+  },
+  detail: (id: string) => {
+    return apiClient.get(`/api/v1/accounts/users/${id}/`);
+  },
+};
+
 export const customerAPI = {
   list: (params?: any) => {
     return apiClient.get("/customers/", { params });
@@ -99,5 +120,23 @@ export const leadAPI = {
   },
   batchAssign: (ids: string[], ownerId: string) => {
     return apiClient.post("/api/v1/customers/leads/batch_assign/", { ids, owner: ownerId });
+  },
+};
+
+export const reportAPI = {
+  getPipelineSummary: (params?: any) => {
+    return apiClient.get("/api/v1/opportunities/opportunities/pipeline_summary/", { params });
+  },
+  getCustomerGrowth: (params?: any) => {
+    return apiClient.get("/api/v1/reports/customer_growth/", { params });
+  },
+  getSalesRanking: (params?: any) => {
+    return apiClient.get("/api/v1/reports/sales_ranking/", { params });
+  },
+  getLeadConversion: (params?: any) => {
+    return apiClient.get("/api/v1/reports/lead_conversion/", { params });
+  },
+  getSalesTrend: (params?: any) => {
+    return apiClient.get("/api/v1/reports/sales_trend/", { params });
   },
 };
