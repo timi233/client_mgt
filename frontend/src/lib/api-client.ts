@@ -14,22 +14,22 @@ export const authAPI = {
 
 export const userAPI = {
   me: () => {
-    return apiClient.get("/api/v1/accounts/users/me/");
+    return apiClient.get("/accounts/users/me/");
   },
   list: (params?: any) => {
-    return apiClient.get("/api/v1/accounts/users/", { params });
+    return apiClient.get("/accounts/users/", { params });
   },
   create: (data: any) => {
-    return apiClient.post("/api/v1/accounts/users/", data);
+    return apiClient.post("/accounts/users/", data);
   },
   update: (id: string, data: any) => {
-    return apiClient.put(`/api/v1/accounts/users/${id}/`, data);
+    return apiClient.put(`/accounts/users/${id}/`, data);
   },
   delete: (id: string) => {
-    return apiClient.delete(`/api/v1/accounts/users/${id}/`);
+    return apiClient.delete(`/accounts/users/${id}/`);
   },
   detail: (id: string) => {
-    return apiClient.get(`/api/v1/accounts/users/${id}/`);
+    return apiClient.get(`/accounts/users/${id}/`);
   },
 };
 
@@ -98,45 +98,45 @@ export const contactAPI = {
 
 export const leadAPI = {
   list: (params?: any) => {
-    return apiClient.get("/api/v1/customers/leads/", { params });
+    return apiClient.get("/customers/leads/", { params });
   },
   create: (data: any) => {
-    return apiClient.post("/api/v1/customers/leads/", data);
+    return apiClient.post("/customers/leads/", data);
   },
   update: (id: string, data: any) => {
-    return apiClient.put(`/api/v1/customers/leads/${id}/`, data);
+    return apiClient.put(`/customers/leads/${id}/`, data);
   },
   delete: (id: string) => {
-    return apiClient.delete(`/api/v1/customers/leads/${id}/`);
+    return apiClient.delete(`/customers/leads/${id}/`);
   },
   detail: (id: string) => {
-    return apiClient.get(`/api/v1/customers/leads/${id}/`);
+    return apiClient.get(`/customers/leads/${id}/`);
   },
   convertToCustomer: (id: string, data: any) => {
-    return apiClient.post(`/api/v1/customers/leads/${id}/convert_to_customer/`, data);
+    return apiClient.post(`/customers/leads/${id}/convert_to_customer/`, data);
   },
   batchDelete: (ids: string[]) => {
-    return apiClient.post("/api/v1/customers/leads/batch_delete/", { ids });
+    return apiClient.post("/customers/leads/batch_delete/", { ids });
   },
   batchAssign: (ids: string[], ownerId: string) => {
-    return apiClient.post("/api/v1/customers/leads/batch_assign/", { ids, owner: ownerId });
+    return apiClient.post("/customers/leads/batch_assign/", { ids, owner: ownerId });
   },
 };
 
 export const reportAPI = {
   getPipelineSummary: (params?: any) => {
-    return apiClient.get("/api/v1/opportunities/opportunities/pipeline_summary/", { params });
+    return apiClient.get("/opportunities/pipeline_summary/", { params });
   },
   getCustomerGrowth: (params?: any) => {
-    return apiClient.get("/api/v1/reports/customer_growth/", { params });
+    return apiClient.get("/reports/customer_growth/", { params });
   },
   getSalesRanking: (params?: any) => {
-    return apiClient.get("/api/v1/reports/sales_ranking/", { params });
+    return apiClient.get("/reports/sales_ranking/", { params });
   },
   getLeadConversion: (params?: any) => {
-    return apiClient.get("/api/v1/reports/lead_conversion/", { params });
+    return apiClient.get("/reports/lead_conversion/", { params });
   },
   getSalesTrend: (params?: any) => {
-    return apiClient.get("/api/v1/reports/sales_trend/", { params });
+    return apiClient.get("/reports/sales_trend/", { params });
   },
 };

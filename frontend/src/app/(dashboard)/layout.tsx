@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Space } from "antd";
 import type { MenuProps } from "antd";
 import {
   DashboardOutlined,
@@ -158,7 +158,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </span>
               </div>
             )}
-            <LogoutOutlined className="cursor-pointer" onClick={logout} />
+            <Space className="cursor-pointer" onClick={logout}>
+              <span>退出登录</span>
+              <LogoutOutlined />
+            </Space>
           </div>
         </Header>
         <Content className="bg-gray-50 p-6">{children}</Content>

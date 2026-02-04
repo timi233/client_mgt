@@ -28,10 +28,12 @@ function CallbackContent() {
         }
       }
 
-      router.push("/dashboard");
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 500);
     } else {
       setTimeout(() => {
-        router.push("/login");
+        window.location.href = "/login";
       }, 2000);
     }
   }, [searchParams, router]);

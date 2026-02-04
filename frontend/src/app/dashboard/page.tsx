@@ -1,11 +1,14 @@
 "use client";
 
-import { Card, Statistic, Row, Col, Spin } from "antd";
+import { Card, Statistic, Row, Col, Spin, Button, Space } from "antd";
 import {
   ShopOutlined,
   FileTextOutlined,
   DollarOutlined,
   PlusCircleOutlined,
+  CustomerServiceOutlined,
+  UserAddOutlined,
+  SolutionOutlined,
 } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { customerAPI, opportunityAPI } from "@/lib/api-client";
@@ -73,7 +76,7 @@ export default function DashboardPage() {
               title="客户总数"
               value={stats.totalCustomers}
               prefix={<ShopOutlined />}
-              valueStyle={{ color: "#3f8600" }}
+              styles={{ content: { color: "#3f8600" } }}
             />
           </Card>
         </Col>
@@ -83,7 +86,7 @@ export default function DashboardPage() {
               title="商机总数"
               value={stats.totalOpportunities}
               prefix={<FileTextOutlined />}
-              valueStyle={{ color: "#cf1322" }}
+              styles={{ content: { color: "#cf1322" } }}
             />
           </Card>
         </Col>
@@ -93,7 +96,7 @@ export default function DashboardPage() {
               title="本月新增客户"
               value={stats.newCustomersThisMonth}
               prefix={<PlusCircleOutlined />}
-              valueStyle={{ color: "#1890ff" }}
+              styles={{ content: { color: "#1890ff" } }}
             />
           </Card>
         </Col>
@@ -104,11 +107,33 @@ export default function DashboardPage() {
               value={stats.monthlyRevenue}
               prefix={<DollarOutlined />}
               precision={2}
-              valueStyle={{ color: "#1890ff" }}
+              styles={{ content: { color: "#1890ff" } }}
             />
           </Card>
         </Col>
       </Row>
+      <Card title="快速操作" className="mb-6">
+        <Space size="middle" wrap>
+          <Button type="primary" icon={<UserAddOutlined />} href="/customers/create">
+            新建客户
+          </Button>
+          <Button icon={<SolutionOutlined />} href="/opportunities/create">
+            新建商机
+          </Button>
+          <Button icon={<CustomerServiceOutlined />} href="/leads/create">
+            新建线索
+          </Button>
+          <Button icon={<ShopOutlined />} href="/customers">
+            客户列表
+          </Button>
+          <Button icon={<FileTextOutlined />} href="/opportunities">
+            商机列表
+          </Button>
+          <Button icon={<CustomerServiceOutlined />} href="/leads">
+            线索列表
+          </Button>
+        </Space>
+      </Card>
       <Card>
         <h2 className="text-xl font-semibold mb-4">欢迎使用 Pury CRM</h2>
         <p className="text-gray-600">

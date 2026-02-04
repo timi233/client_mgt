@@ -60,7 +60,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!loading && !user && pathname !== "/login") {
+    const hasToken = !!localStorage.getItem("access_token");
+    if (!loading && !user && !hasToken && pathname !== "/login" && pathname !== "/auth/callback") {
       router.push("/login");
     }
   }, [user, loading, pathname, router]);
