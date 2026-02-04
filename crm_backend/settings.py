@@ -29,7 +29,13 @@ SECRET_KEY = config(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1").split(",")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1")
+if ALLOWED_HOSTS == "*":
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = ALLOWED_HOSTS.split(",")
+
+APPEND_SLASH = True
 
 
 # Application definition
@@ -51,6 +57,7 @@ INSTALLED_APPS = [
     "customers",
     "opportunities",
     "feishu",
+    "reports",
 ]
 
 MIDDLEWARE = [
@@ -165,6 +172,10 @@ FEISHU_APP_ID = config("FEISHU_APP_ID", default="")
 FEISHU_APP_SECRET = config("FEISHU_APP_SECRET", default="")
 FEISHU_VERIFICATION_TOKEN = config("FEISHU_VERIFICATION_TOKEN", default="")
 FEISHU_ENCRYPT_KEY = config("FEISHU_ENCRYPT_KEY", default="")
+FEISHU_REDIRECT_URI = config("FEISHU_REDIRECT_URI", default="")
+
+# Frontend URL for OAuth redirects
+FRONTEND_URL = config("FRONTEND_URL", default="http://localhost:3000")
 
 
 # CORS Configuration

@@ -10,7 +10,7 @@ from customers.views import (
 )
 
 router = DefaultRouter()
-router.register(r"customers", CustomerViewSet)
+router.register(r"", CustomerViewSet, basename="customer")
 router.register(r"contacts", ContactViewSet)
 router.register(r"leads", LeadViewSet)
 router.register(r"pools", CustomerPoolViewSet)

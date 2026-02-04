@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -135,20 +135,24 @@ def feishu_callback(request):
             logger.info(f"Created new user {username} from Feishu OAuth")
 
         refresh = RefreshToken.for_user(user)
-        return Response(
-            {
-                "access": str(refresh.access_token),
-                "refresh": str(refresh),
-                "user": {
-                    "id": str(user.id),
-                    "username": user.username,
-                    "display_name": user.display_name,
-                    "email": user.email,
-                    "avatar_url": user.avatar_url,
-                    "role": user.role,
-                },
-            }
-        )
+
+        user_data_json = json.dumps({
+            "id": str(user.id),
+            "username": user.username,
+            "display_name": user.display_name,
+            "email": user.email,
+            "avatar_url": user.avatar_url,
+            "role": user.role,
+        })
+
+        params = urlencode({
+            "access": str(refresh.access_token),
+            "refresh": str(refresh),
+            "user": user_data_json,
+        })
+
+        frontend_url = getattr(settings, 'FRONTEND_URL', 'http://localhost:3000')
+        return redirect(f"{frontend_url}/auth/callback?{params}")
 
     except requests.RequestException as e:
         logger.error(f"Feishu OAuth callback error: {e}")
