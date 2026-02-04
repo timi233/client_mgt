@@ -26,3 +26,6 @@ staticfiles/
 # OS
 .DS_Store
 Thumbs.db
+
+# CCB (Claude Code Bridge)
+.ccb_config/*-session
